@@ -1,0 +1,50 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				position: relative;
+				width: 640px;
+				height: 480px;
+			}
+
+			.main_text {
+				position: absolute;
+				top: 10px;
+				left: 10px;
+			}
+
+			.main_text span {
+				white-space: wrap;
+			}
+
+			.main_image {
+				position: absolute;
+				top: 100px;
+				right: 10px;
+				opacity: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="main_text">
+				<h3>검은곰의 인수인계서 페이지에요!</h3>
+				<span>대충 알고있는 내용에 대해서는 대부분 정리해뒀습니다. 컨플루언스에 정리되어있는 내용도 있으니, 이 페이지에서 찾을 수 없는 내용에 대해서는 컨플루언스를 찾아보십쇼. 그래도 정 모르겠다 싶으시면 연락 주십쇼. ' ㅇ')/</span>
+			</div>
+			<img class="main_image" src=`${import.meta.env.BASE_URL}/public/smile.png`>
+			</img>
+		</main>
+		<Footer />
+	</body>
+</html>
