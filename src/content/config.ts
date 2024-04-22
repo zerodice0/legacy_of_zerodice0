@@ -13,30 +13,8 @@ const blog = defineCollection({
 	}),
 });
 
-const server = defineCollection({
-	type: 'content',
-	// Type-check frontmatter using a schema
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
-	}),
-});
+const server = blog;
+const main = blog;
+const compile = blog;
 
-const main = defineCollection({
-	type: 'content',
-	// Type-check frontmatter using a schema
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
-	}),
-});
-
-export const collections = { blog, server, main };
+export const collections = { blog, server, main, compile };
