@@ -3,44 +3,53 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-
 ---
+<style>
+	main {
+		position: relative;
+		width: auto;
+		min-height: 480px;
+		padding: 100px;
+	}
+
+	.main_text {
+		position: relative;
+		top: 10px;
+		left: 10px;
+	}
+
+	.main_text article {
+		display: flex;
+		white-space: pre-line;
+		flex-wrap: wrap;
+		word-wrap: break-word;
+	}
+
+	.main_image {
+		position: absolute;
+
+		bottom: 0px;
+		right: 10px;
+		opacity: 30%;
+	}
+</style>
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				position: relative;
-				width: 640px;
-				height: 480px;
-			}
-
-			.main_text {
-				position: absolute;
-				top: 10px;
-				left: 10px;
-			}
-
-			.main_text span {
-				white-space: wrap;
-			}
-
-			.main_image {
-				position: absolute;
-				bottom: 0px;
-				right: 10px;
-				opacity: 50%;
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<div class="main_text">
 				<h3>검은곰의 인수인계서 페이지에요!</h3>
-				<span>대충 알고있는 내용에 대해서는 대부분 정리해뒀습니다. 컨플루언스에 정리되어있는 내용도 있으니, 이 페이지에서 찾을 수 없는 내용에 대해서는 컨플루언스를 찾아보십쇼. 그래도 정 모르겠다 싶으시면 연락 주십쇼. ' ㅇ')/</span>
+				<article>
+					대충 알고있는 내용에 대해서는 대부분 정리해뒀습니다. 
+					시간상 정리하지 못한 내용들이 있을 수 있으나, 어지간한 내용들은 컨플루언스에 남겨져있는 게시물과 크게 다른 내용은 없습니다. 이 문서에서 내용을 찾을 수 없는 경우, 컨플루언스에 정리되어있는 내용을 참고해주십쇼.
+					인수인계에 대한 내용을 조금이나마 보기 편하게 만들기 위해서, 몇 가지 카테고리를 나눠 정리했습니다.
+					우측하단의 검은곰에 마우스 포인터를 갖다대면, 정리되어있는 문서들을 카테고리별로 조회할 수 있으니 참고해주세요.
+				</article>
 			</div>
 			<img class="main_image" src=`${import.meta.env.BASE_URL}/smile.png`>
 			</img>
