@@ -1,67 +1,61 @@
 ---
+import "./Footer.css"
 const today = new Date();
+
+const routeList = [
+	{route: "blog", title: "블로그"},
+	{route: "server", title: "서버"},
+	{route: "mobile", title: "모바일"},
+];
 ---
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
+
+<script>
+	class SpeechBlackBear extends HTMLElement {
+		speechList = [
+			"검은곰의 인수인계 페이지입니다.",
+			"문제는 잘 해결되고 있나요?"
+		]
+		speechIndex = 0;
+		
+		constructor() {
+			super();
+			const speechBubble = this.querySelector("#speech-bubble-text");
+			if (speechBubble) {
+				speechBubble.textContent = this.speechList[this.speechIndex];
+			}
+
+			setInterval(() => {
+				const newSpeechIndex = Math.floor(
+					Math.random()*this.speechList.length
+				);
+			
+				if (this.speechIndex != newSpeechIndex && speechBubble) {
+					this.speechIndex = newSpeechIndex;
+					speechBubble.textContent = this.speechList[this.speechIndex];
+				}
+			}, 10 * 1000);
+		}
 	}
 
-	.footer-image {
-		position: fixed;
-		right: 0px;
-		bottom: 0px;
-		width: auto;
-		height: 200px;
-	}
-
-	.speech-bubble {
-		position: fixed;
-		right: 30px;
-		bottom: 210px;
-		background: #000000;
-		border-radius: .4em;
-		padding: 10px;
-		color: white;
-	}
-
-	.speech-bubble:after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		right: 75px;
-		width: 0;
-		height: 0;
-		border: 20px solid transparent;
-		border-top-color: #000000;
-		border-bottom: 0;
-		border-right: 0;
-		margin-left: -10px;
-		margin-bottom: -20px;
-	}
-</style>
+	customElements.define("speech-black-bear", SpeechBlackBear)
+</script>
 
 <footer>
-	<div>
+	<speech-black-bear>
 		<hgroup class="speech-bubble">
-			검은곰의 인수인계 페이지입니다.
+			<span id="speech-bubble-text"></span>
+			<ul class="menu-list">
+				{
+					routeList.map((route) => (
+						<li>
+							<a class="menu-list-item" href={`${import.meta.env.BASE_URL}/${route.route}`}>{route.title}에 대해서</a>
+						</li>
+					))
+				}
+
+			</ul>
 		</hgroup>
 		<img class="footer-image" src=`${import.meta.env.BASE_URL}/smile.png`>
-	</div>
+	</speech-black-bear>
 	&copy; {today.getFullYear()} ITX AI<br/> All rights reserved.
 </footer>
