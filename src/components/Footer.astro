@@ -1,11 +1,6 @@
 ---
 const today = new Date();
 ---
-
-<footer>
-	&copy; {today.getFullYear()} ITX AI<br/> All rights reserved.
-</footer>
-
 <style>
 	footer {
 		padding: 2em 1em 6em 1em;
@@ -26,4 +21,47 @@ const today = new Date();
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
 	}
+
+	.footer-image {
+		position: fixed;
+		right: 0px;
+		bottom: 0px;
+		width: auto;
+		height: 200px;
+	}
+
+	.speech-bubble {
+		position: fixed;
+		right: 30px;
+		bottom: 210px;
+		background: #000000;
+		border-radius: .4em;
+		padding: 10px;
+		color: white;
+	}
+
+	.speech-bubble:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		right: 75px;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-top-color: #000000;
+		border-bottom: 0;
+		border-right: 0;
+		margin-left: -10px;
+		margin-bottom: -20px;
+	}
 </style>
+
+<footer>
+	<div>
+		<hgroup class="speech-bubble">
+			검은곰의 인수인계 페이지입니다.
+		</hgroup>
+		<img class="footer-image" src=`${import.meta.env.BASE_URL}/smile.png`>
+	</div>
+	&copy; {today.getFullYear()} ITX AI<br/> All rights reserved.
+</footer>
