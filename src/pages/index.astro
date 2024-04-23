@@ -25,14 +25,85 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		word-wrap: break-word;
 	}
 
-	.main_image {
+	.main_image_base {
 		position: absolute;
-
+	
 		bottom: 0px;
 		right: 10px;
+
+		transition: ease-in-out 1s;
+	}
+	.main_image {
 		opacity: 30%;
+
+	}
+	
+	.hidden_image {
+		opacity: 0%;
+	}
+
+	.hidden_word {
+		position: absolute;
+		opacity: 0%;
+		font-size: 2rem;
+		font-style: bold;
+
+		transition: ease-in-out 1s;
+	}
+
+	#hidden_word1 {
+		right: 524px;
+		bottom: 300px;
+	}
+
+	#hidden_word2 {
+		right: 450px;
+		bottom: 290px;
+	}
+	
+	#hidden_word3 {
+		right: 620px;
+		bottom: 220px;
+	}
+	
+	#hidden_word4 {
+		right: 460px;
+		bottom: 170px;
 	}
 </style>
+
+<script>
+	const mainImage =	document.querySelector<HTMLImageElement>(".main_image");
+	const hiddenImage =	document.querySelector<HTMLImageElement>(".hidden_image");
+	const hiddenWords = [
+		document.querySelector<HTMLHtmlElement>("#hidden_word1"),
+		document.querySelector<HTMLHtmlElement>("#hidden_word2"),
+		document.querySelector<HTMLHtmlElement>("#hidden_word3"),
+		document.querySelector<HTMLHtmlElement>("#hidden_word4")
+	];
+	const hiddenAnimation = () => {
+		mainImage?.removeEventListener("click", hiddenAnimation);
+		
+		hiddenWords.forEach((elem, index) => {
+			setTimeout(() => {
+				elem && (elem.style.opacity = "70%");
+			}, index * 1000);
+		});
+		
+		setTimeout(() => {
+			// mainImage.src = `${import.meta.env.BASE_URL}/joker.png`;
+			mainImage && (mainImage.style.opacity = "0%");
+			hiddenImage && (hiddenImage.style.opacity = "30%");
+		}, hiddenWords.length * 1000);
+
+		setTimeout(() => {
+			hiddenWords.forEach((elem) => {
+				elem && (elem.style.opacity = "0%");
+			})
+		}, (hiddenWords.length + 1) * 1000);
+	}
+	mainImage?.addEventListener("click", hiddenAnimation);	
+</script>
 
 <!doctype html>
 <html lang="en">
@@ -51,7 +122,32 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 					우측하단의 검은곰에 마우스 포인터를 갖다대면, 정리되어있는 문서들을 카테고리별로 조회할 수 있으니 참고해주세요.
 				</article>
 			</div>
-			<img class="main_image" src=`${import.meta.env.BASE_URL}/smile.png`>
+			<span
+				class="hidden_word"
+				id="hidden_word1"
+			>
+				어...
+			</span>
+			<span
+				class="hidden_word"
+				id="hidden_word2"
+			>
+				어...!
+			</span>
+			<span
+				class="hidden_word"
+				id="hidden_word3"
+			>
+				점마...!
+			</span>
+			<span
+				class="hidden_word"
+				id="hidden_word4"
+			>
+				점마 조커된다...!
+			</span>
+			<img class="hidden_image main_image_base" src=`${import.meta.env.BASE_URL}/joker.png`>
+			<img class="main_image main_image_base" src=`${import.meta.env.BASE_URL}/smile.png`>
 			</img>
 		</main>
 		<Footer />
