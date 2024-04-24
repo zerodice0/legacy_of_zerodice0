@@ -45,30 +45,54 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.hidden_word {
 		position: absolute;
 		opacity: 0%;
-		font-size: 2rem;
 		font-style: bold;
 
 		transition: ease-in-out 1s;
 	}
 
 	#hidden_word1 {
-		right: 524px;
+		right: 544px;
 		bottom: 300px;
+
+		font-size: 2rem;
 	}
 
 	#hidden_word2 {
 		right: 450px;
-		bottom: 290px;
+		bottom: 270px;
+
+		font-size: 3rem;
 	}
 	
 	#hidden_word3 {
-		right: 620px;
-		bottom: 220px;
+		right: 740px;
+		bottom: 190px;
+
+		font-size: 2.5rem;
 	}
 	
 	#hidden_word4 {
 		right: 460px;
-		bottom: 170px;
+		bottom: 140px;
+
+		font-size: 3rem;
+	}
+
+	@keyframes joker_animation {
+		from {
+			transform:rotate(-3deg);
+		}
+
+		to {
+			transform:rotate(+3deg);
+		}
+	}
+
+	.joker_is_showing {
+		animation-duration: 0.2s;
+		animation-name: joker_animation;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
 	}
 </style>
 
@@ -99,10 +123,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		setTimeout(() => {
 			hiddenWords.forEach((elem) => {
 				elem && (elem.style.opacity = "0%");
-			})
+			});
+
+			hiddenImage?.classList.add("joker_is_showing");
+
+			setTimeout(() => {
+				mainImage && (mainImage.style.opacity = "30%");
+				hiddenImage && (hiddenImage.style.opacity = "0%");
+				hiddenImage?.classList.remove("joker_is_showing");
+
+				mainImage?.addEventListener("click", hiddenAnimation);
+			}, 10 * 1000)
 		}, (hiddenWords.length + 1) * 1000);
 	}
-	mainImage?.addEventListener("click", hiddenAnimation);	
+
+	mainImage?.addEventListener("click", hiddenAnimation);
 </script>
 
 <!doctype html>
