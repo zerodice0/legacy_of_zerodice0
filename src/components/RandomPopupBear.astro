@@ -1,39 +1,128 @@
 ---
-
 ---
 
-<img class="popup_bear_image" src={`${import.meta.env.BASE_URL}/smile.png`}/>
+<div class="popup_bear">
+  <hgroup class="speech_bubble">
+    아~ 집에 가고싶다~
+  </hgroup>
+  <img class="popup_bear_image" src={`${import.meta.env.BASE_URL}/smile.png`}/>
+</div>
+
+<script>
+  const speechList = [
+    "집에 가고싶다."
+  ]
+  const height = "200px";
+  const popup = (position: string, startPoint: number) => {
+    const popupBear = document.querySelector<HTMLHtmlElement>(".popup_bear");
+    const rotate = position === "left" ? 90
+        : position === "right" ? 270
+        : 180; // top
+        
+    if (popupBear) {
+      popupBear.style.animationDuration = "5s";
+      popupBear.style.animationPlayState = "running";
+      popupBear.style.webkitTransform = `rotate(${rotate}deg)`; 
+      popupBear.style.transform = `rotate(${rotate}deg);`
+      popupBear.style.animationName = `pop_in_and_out_${position}`;
+
+      popupBear.style.removeProperty("left");
+      popupBear.style.removeProperty("top");
+      popupBear.style.removeProperty("right");
+
+      const start = startPoint < 0 ? 0 : startPoint;
+      if (position === "left") {
+        popupBear.style.left = `-${height}`;
+        popupBear.style.top = `${start}px`;
+      } else if (position === "right") {
+        popupBear.style.right = `-${height}`;
+        popupBear.style.top = `${start}px`;
+      } else {
+        popupBear.style.top = `-${height}`;
+        popupBear.style.left = `${start}px`;
+      }
+    }
+  }
+
+  const randomPopup = () => {
+    const randomDelay = Math.random() * 30 + 5;
+    const positions = ["left", "top", "right"];
+    const positionSeed = Math.floor(Math.random() * 3);
+    const position = positions[positionSeed];
+
+    const baseSize = position === "top" ? window.innerWidth
+      : window.innerHeight;
+
+    popup(position, Math.floor(baseSize * Math.random() -200));
+
+    setTimeout(() => {
+      randomPopup();
+    }, randomDelay * 1000);
+  }
+
+  randomPopup();
+</script>
 
 <style>
-  @keyframes pop_in_and_out {
-    0% {
-      left: -100px;
-      top: 0px;
-    }
-
-    25%, 75% {
-      left: 0px;
-      top: 0px;
-    }
-
-    100% {
-      left: -100px;
-      top: 0px;
-    }
+  @keyframes pop_in_and_out_left {
+    0% { left: -200px; }
+    25%, 75% { left: 0px; }
+    100% { left: -200px; }
   }
 
-  .popup_bear_image {
-    position: absolute;
-    left: -100px;
-    top: -100px;
-    width: 100px;
-    height: auto;
-    transform:rotate(90deg);
+  @keyframes pop_in_and_out_right {
+    0% { right: -200px; }
+    25%, 75% { right: 0px; }
+    100% { right: -200px; }
+  }
 
+  @keyframes pop_in_and_out_top {
+    0% { top: -200px; }
+    25%, 75% { top: 0px; }
+    100% { top: -200px; }
+  }
+
+  .popup_bear {
+    display: flex;
+
+    position: absolute;
     animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-name: pop_in_and_out;
-    animation-duration: 5s;
+    animation-iteration-count: 1;
     animation-direction: alternate;
   }
+  .popup_bear img {
+    width: 100px;
+    height: 100px;
+    position:relative;
+  }
+
+  .speech_bubble {
+    position: absolute;
+		width: 200px;
+		bottom: 120px;
+		background: #000000;
+		border-radius: .4em;
+		padding: 10px;
+		color: white;
+
+    animation-name: soft-blink;
+    animation-duration: 5s;
+    animation-play-state: paused;
+    animation-timing-function: ease-in-out;
+	}
+
+	.speech_bubble:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		right: 180px;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-top-color: #000000;
+		border-bottom: 0;
+		border-right: 0;
+		margin-left: -10px;
+		margin-bottom: -20px;
+	}
 </style>
