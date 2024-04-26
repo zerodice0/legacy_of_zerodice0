@@ -1,6 +1,8 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import RandomPopupBear from './RandomPopupBear.astro';
+import SpeechBear from './SpeechBear.astro';
 
 const {pageDescription} = Astro.props;
 
@@ -22,6 +24,8 @@ const {pageDescription} = Astro.props;
 			<HeaderLink href={import.meta.env.BASE_URL}>Home</HeaderLink>
 		</div>
 	</nav>
+	<RandomPopupBear/>
+	<SpeechBear/>
 </header>
 
 <style>
