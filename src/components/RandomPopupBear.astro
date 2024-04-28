@@ -10,15 +10,25 @@
 
 <script>
   const speechList = [
-    "집에 가고싶다."
+    "아~ 집에 가고싶다.",
+    "점심시간은 멀었나?",
+    "오늘 야근해야되나?",
+    "아니 꼭 약속있는 날만..."
   ]
   const height = "200px";
   const popup = (position: string, startPoint: number) => {
+    const speechSeed = Math.floor(Math.random() * speechList.length);
     const popupBear = document.querySelector<HTMLHtmlElement>(".popup_bear");
+    const speechBubble = document.querySelector<HTMLImageElement>(".speech_bubble");
+
     const rotate = position === "left" ? 90
         : position === "right" ? 270
         : 180; // top
         
+    if (speechBubble) {
+      speechBubble.textContent = speechList[speechSeed];
+    }
+
     if (popupBear) {
       popupBear.style.animationDuration = "5s";
       popupBear.style.animationPlayState = "running";
@@ -30,7 +40,7 @@
       popupBear.style.removeProperty("top");
       popupBear.style.removeProperty("right");
 
-      const start = startPoint < 0 ? 0 : startPoint;
+      const start = startPoint < 200 ? 200 : startPoint;
       if (position === "left") {
         popupBear.style.left = `-${height}`;
         popupBear.style.top = `${start}px`;
@@ -52,15 +62,19 @@
 
     const baseSize = position === "top" ? window.innerWidth
       : window.innerHeight;
+    const newBaseSize = Math.floor(baseSize * Math.random());
 
-    popup(position, Math.floor(baseSize * Math.random() -200));
+    popup(position, newBaseSize > 200 ? newBaseSize - 200 : 200);
 
+    
     setTimeout(() => {
       randomPopup();
     }, randomDelay * 1000);
   }
 
-  randomPopup();
+  setTimeout(() => {
+    randomPopup();
+  }, 5000);
 </script>
 
 <style>
@@ -83,9 +97,10 @@
   }
 
   .popup_bear {
+    top: -200px;
     display: flex;
 
-    position: absolute;
+    position: fixed;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-direction: alternate;
@@ -98,7 +113,9 @@
 
   .speech_bubble {
     position: absolute;
-		width: 200px;
+		min-width: 100px;
+    max-width: 200px;
+    text-wrap: nowrap;
 		bottom: 120px;
 		background: #000000;
 		border-radius: .4em;
@@ -115,7 +132,7 @@
 		content: '';
 		position: absolute;
 		bottom: 0;
-		right: 180px;
+		left: 40px;
 		width: 0;
 		height: 0;
 		border: 20px solid transparent;
