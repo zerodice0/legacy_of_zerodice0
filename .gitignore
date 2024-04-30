@@ -9,6 +9,7 @@ src/content/blog/
 src/content/main/
 src/content/server/
 src/content/compile/
+src/content/open_api/
 
 # dependencies
 node_modules/
