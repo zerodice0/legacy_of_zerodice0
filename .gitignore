@@ -10,6 +10,7 @@ src/content/main/
 src/content/server/
 src/content/compile/
 src/content/open_api/
+src/content/mobile/
 
 # dependencies
 node_modules/
