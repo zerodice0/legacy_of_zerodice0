@@ -11,6 +11,7 @@ src/content/server/
 src/content/compile/
 src/content/open_api/
 src/content/mobile/
+src/content/side/
 
 # dependencies
 node_modules/
