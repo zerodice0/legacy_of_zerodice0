@@ -7,5 +7,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: "http://192.168.100.18/",
 	integrations: [mdx(), sitemap()],
-  base: "/\~zerodice0/legacy"
+  base: "/\~zerodice0/legacy",
+	optimizeDeps: {
+		exclude: ['@mdx-js/react']
+	}
 });
