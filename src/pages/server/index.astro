@@ -20,6 +20,7 @@ const posts = (await getCollection('server')).sort();
 			ul {
 				display: flex;
 				flex-wrap: wrap;
+				align-items: stretch;
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
@@ -40,6 +41,7 @@ const posts = (await getCollection('server')).sort();
 				display: block;
 				color: #000000;
 				text-decoration: none;
+				height: 100%;
 			}
 			.title {
 				margin: 0;
