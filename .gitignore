@@ -12,6 +12,7 @@ src/content/compile/
 src/content/open_api/
 src/content/mobile/
 src/content/side/
+public/about.json
 
 # dependencies
 node_modules/
