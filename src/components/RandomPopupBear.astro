@@ -14,11 +14,15 @@
     "점심시간은 멀었나?",
     "오늘 야근해야되나?",
     "아~ 졸립다.",
-    "놀러가기 딱 좋은 날씨네.",
+    "집에 가기 딱 좋은 날씨네.",
     "또 엄성준 씨 버그냐?",
     "팀장님 오늘 연차셔?",
     "아? 이게 돌아가?",
-    "그걸 왜 나한테 물어봐...?",
+    "그걸 왜 나한테 물어봐?",
+    "제가요? 그걸요?",
+    "아닐껄요?",
+    "안되는데요?",
+    "기분탓일껄?",
   ]
   const height = "200px";
   const popup = (position: string, startPoint: number) => {
@@ -60,7 +64,7 @@
   }
 
   const randomPopup = () => {
-    const randomDelay = Math.random() * 30 + 5;
+    const randomDelay = Math.random() * 60 + 5;
     const positions = ["left", "top", "right"];
     const positionSeed = Math.floor(Math.random() * 3);
     const position = positions[positionSeed];
@@ -79,7 +83,7 @@
 
   setTimeout(() => {
     randomPopup();
-  }, 5000);
+  }, 10*1000);
 </script>
 
 <style>
