@@ -11,9 +11,6 @@ const routeList = [
   <hgroup class="speech-bubble">
     <span id="speech-bubble-text"></span>
     <ul class="menu-list">
-      <li>
-				<a class="menu-list-item" href={`${import.meta.env.BASE_URL}/`} >메인으로 돌아가기</a>
-			</li>
       {
         routeList.map((route) => (
           <li>
@@ -45,6 +42,7 @@ const routeList = [
 			"뭐, 어떻게건 되겠지~",
 			"아~ 집에 가고싶다~",
 			"아? 이게 돌아가?",
+			"누가 코드를 이렇게 짰어? 난가?"
 		]
 		speechIndex = 0;
 		
